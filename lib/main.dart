@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stumato_assignment/ui/homepage.dart';
+import 'package:stumato_assignment/ui/bottomnaviagtionbarscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:stumato_assignment/providers/bottomnavigationbarprovider.dart';
 
@@ -21,12 +21,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home:   MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => BottomNavigationProvider()),
-      ],
-      child: Homepage(),
-      
-    ));
+      home: MainScreen());
   }
 }
