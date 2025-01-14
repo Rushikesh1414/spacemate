@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stumato_assignment/ui/bottomnaviagtionbarscreen.dart';
 import 'package:provider/provider.dart';
-import 'package:stumato_assignment/providers/bottomnavigationbarprovider.dart';
+
 
 
 

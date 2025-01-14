@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stumato_assignment/core/constants.dart';
 
-
-
-class DesksScreen extends StatelessWidget {
+class FacilitiesMeetings extends StatelessWidget {
   final PageController _pageController = PageController();
 
-  DesksScreen({super.key});
+  FacilitiesMeetings({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -15,21 +13,20 @@ class DesksScreen extends StatelessWidget {
         controller: _pageController,
         itemCount: 4,
         itemBuilder: (context, index) {
-          return OnboardingPage(index: index);
+          return OnboardingPageFacilities(index: index);
         },
       ),
     ));
   }
 }
 
-
 // import 'package:flutter/material.dart';
 // import 'package:stumato_assignment/core/constants.dart';
 
-class OnboardingPage extends StatelessWidget {
+class OnboardingPageFacilities extends StatelessWidget {
   final int index;
 
-  OnboardingPage({required this.index});
+  const OnboardingPageFacilities({required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +39,12 @@ class OnboardingPage extends StatelessWidget {
             },
           ),
           title: Text(
-            "Deskmate",
+            "Meeting mate",
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: AppColors.accent1),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _getImage(),
           SizedBox(height: 10),
@@ -105,19 +102,20 @@ class OnboardingPage extends StatelessWidget {
     switch (index) {
       case 0:
         return Image.asset(
-          'assets/images/person.jpg',
+          'assets/images/facilities_meetings_onboarding_1[1].jpg',
           fit: BoxFit.cover,
           height: 440,
         );
       case 1:
         return Image.asset(
-          'assets/images/facilities_desks_onboarding_2.jpg',
-          fit: BoxFit.cover,
-          height: 440,
-          width: 450,
+          'assets/images/facilities__2.jpg',
+          // fit: BoxFit.cover,
+          // height: 440,
+          // width: 450,
         );
       case 2:
-        return Image.asset('assets\images\person.jpg', height: 100);
+        return Image.asset('assets/images/facilities_meetings_onboarding_3.jpg',
+            height: 100);
       case 3:
         return Image.asset('assets/images/do_best_work.png', height: 100);
       default:
