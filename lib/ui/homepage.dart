@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         child: Scaffold(
             appBar: AppBar(
               actions: [Icon(Icons.person)],
-              leading: Icon(Icons.home),
+              leading: const Icon(Icons.home),
               toolbarHeight: 90,
               title: const Text(
                 "SpaceMate",

@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:stumato_assignment/ui/facilities/facilities_desks.dart';
+import 'package:stumato_assignment/ui/facilities/facilities_meetings.dart';
+import 'package:stumato_assignment/ui/facilities/facilities_shuttles.dart';
 
 class FacilitiesScreen extends StatelessWidget {
+  const FacilitiesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Spacemate"),
+        title: const Text("Spacemate"),
         centerTitle: true,
-        leading: Icon(Icons.house),
-        actions: [Icon(Icons.person)],
+        leading: const Icon(Icons.house),
+        actions: const [Icon(Icons.person)],
         backgroundColor: Colors.blueAccent,
         toolbarHeight: 90,
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            Center(
+            const Center(
               child: Text(
                 "All the facilities & around your \n building in one place",
                 style: TextStyle(
@@ -28,7 +32,7 @@ class FacilitiesScreen extends StatelessWidget {
                     color: Colors.blue),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
@@ -54,10 +58,10 @@ class FacilitiesScreen extends StatelessWidget {
                             size: 40,
                             color: Colors.blue.shade900,
                           ),
-                          Text(
+                          const Text(
                             "desks",
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                               color: Colors.black87,
@@ -68,69 +72,85 @@ class FacilitiesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
-                  child: Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.meeting_room_sharp,
-                          size: 40,
-                          color: Colors.blue.shade900,
-                        ),
-                        Text(
-                          "Meetings",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black87,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FacilitiesMeetings()));
+                    },
+                    child: Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.meeting_room_sharp,
+                            size: 40,
+                            color: Colors.blue.shade900,
                           ),
-                        ),
-                      ],
+                          const Text(
+                            "Meetings",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
-                  child: Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.train_sharp,
-                          size: 40,
-                          color: Colors.blue.shade900,
-                        ),
-                        Text(
-                          "Shuttles",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black87,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FacilitiesShuttles()));
+                    },
+                    child: Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.train_sharp,
+                            size: 40,
+                            color: Colors.blue.shade900,
                           ),
-                        ),
-                      ],
+                          const Text(
+                            "Shuttles",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
@@ -150,10 +170,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Food \n delivery",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -163,7 +183,7 @@ class FacilitiesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
@@ -181,10 +201,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Cafeteria \n",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -194,7 +214,7 @@ class FacilitiesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
@@ -212,10 +232,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Vending machine",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -227,7 +247,7 @@ class FacilitiesScreen extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
@@ -247,10 +267,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Gym",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -260,7 +280,7 @@ class FacilitiesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
@@ -278,10 +298,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Sports",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -291,7 +311,7 @@ class FacilitiesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
@@ -309,10 +329,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Games",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -324,7 +344,7 @@ class FacilitiesScreen extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
@@ -344,10 +364,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Massages",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -357,7 +377,7 @@ class FacilitiesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
@@ -375,10 +395,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Child care",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -388,7 +408,7 @@ class FacilitiesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
@@ -406,10 +426,10 @@ class FacilitiesScreen extends StatelessWidget {
                           color: Colors.blue.shade900,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           "Petcare",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
