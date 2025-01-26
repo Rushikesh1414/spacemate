@@ -1,144 +1,146 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stumato_assignment/core/constants.dart';
+import 'package:stumato_assignment/models/facilities_models/DesksOnboardingModel.dart';
+import 'package:stumato_assignment/providers/desksproviders/desks_providers.dart';
 
+class FacilitiesDeskScreen extends StatefulWidget {
+  const FacilitiesDeskScreen({super.key});
 
-
-class DesksScreen extends StatelessWidget {
-  final PageController _pageController = PageController();
-
-  DesksScreen({super.key});
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      body: PageView.builder(
-        controller: _pageController,
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return OnboardingPage(index: index);
-        },
-      ),
-    ));
-  }
+  State<FacilitiesDeskScreen> createState() => _FacilitiesDeskScreenState();
 }
 
+class _FacilitiesDeskScreenState extends State<FacilitiesDeskScreen> {
+  final PageController _pageController = PageController(initialPage: 3);
+  int _currentPage = 4;
 
-// import 'package:flutter/material.dart';
-// import 'package:stumato_assignment/core/constants.dart';
-
-class OnboardingPage extends StatelessWidget {
-  final int index;
-
-  OnboardingPage({required this.index});
+  final String baseurlofimage = 'https://strapi.apps.rredu.in';
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              Navigator.pop(context); // Navigates back to the previous page
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white, // Change the color of the back button
+          onPressed: () {
+            Navigator.pop(context); // Or any other action
+          },
+        ),
+        backgroundColor: AppColors.accent1,
+        title: Text(
+          'DeskMate',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Consumer<DeskProvider>(
+        builder: (context, deskProvider, child) {
+          return FutureBuilder<DesksOnboardingModel>(
+            future: deskProvider.desks,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.data.isEmpty) {
+                return Center(child: Text('No data available'));
+              }
+
+              final desks = snapshot.data!.data;
+
+              return PageView.builder(
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPage = index;
+                  });
+                },
+                controller: _pageController,
+                scrollDirection: Axis.horizontal,
+                reverse: true,
+                itemCount: desks.length,
+                itemBuilder: (context, index) {
+                  debugPrint('index: $index');
+                  final desk = desks[index];
+                  return Column(
+                    //  mainAxisAlignment: MainAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: screenHeight * 0.5,
+                        width: screenWidth * 1.9,
+                        child: Image.network(
+                          baseurlofimage + desk.carouselImage.url,
+                          // deskProvider._deskService.baseUrl + desk.carouselImage.url,
+
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text(
+                            desk.title,
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      SizedBox.shrink(),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          desk.description,
+                          // textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.arrow_forward_ios_sharp,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: List.generate(desks.length, (index) {
+                            return AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              margin: EdgeInsets.symmetric(horizontal: 4),
+                              height: 4,
+                              width: _currentPage == index ? 24 : 16,
+                              decoration: BoxDecoration(
+                                color: _currentPage == index
+                                    ? Colors.grey
+                                    : AppColors.accent1,
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
-          ),
-          title: Text(
-            "Deskmate",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: AppColors.accent1),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _getImage(),
-          SizedBox(height: 10),
-          Text(
-            _getTitle(),
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primaryText,
-            ),
-          ),
-          SizedBox(height: 10),
-          Text(
-            _getDescription(),
-            textAlign: TextAlign.center,
-            style:
-                const TextStyle(fontSize: 16, color: AppColors.secondaryText),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
-
-  String _getTitle() {
-    switch (index) {
-      case 0:
-        return 'Book a desk';
-      case 1:
-        return 'Plan your office work';
-      case 2:
-        return 'Book scan work';
-      case 3:
-        return 'Do your best work';
-      default:
-        return '';
-    }
-  }
-
-  String _getDescription() {
-    switch (index) {
-      case 0:
-        return 'you can book desks i';
-      case 1:
-        return 'Discover the amazing features we offer.';
-      case 2:
-        return 'Connect with people and stay updated.';
-      case 3:
-        return 'Let’s get started and enjoy the app!';
-      default:
-        return '';
-    }
-  }
-
-  Widget _getImage() {
-    switch (index) {
-      case 0:
-        return Image.asset(
-          'assets/images/person.jpg',
-          fit: BoxFit.cover,
-          height: 440,
-        );
-      case 1:
-        return Image.asset(
-          'assets/images/facilities_desks_onboarding_2.jpg',
-          fit: BoxFit.cover,
-          height: 440,
-          width: 450,
-        );
-      case 2:
-        return Image.asset('assets\images\person.jpg', height: 100);
-      case 3:
-        return Image.asset('assets/images/do_best_work.png', height: 100);
-      default:
-        return Image.asset('assets/images/default_image.png', height: 100);
-    }
-  }
 }
-//   Color _getBackgroundColor() {
-//     switch (index) {
-//       case 0:
-//         return Colors.blue;
-//       case 1:
-//         return Colors.green;
-//       case 2:
-//         return Colors.orange;
-//       case 3:
-//         return Colors.purple;
-//       default:
-//         return Colors.black;
-//     }
-//   }
-// }
-
-

@@ -5,7 +5,7 @@
  
 @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         "Discover Screen",
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

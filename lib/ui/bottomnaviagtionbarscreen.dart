@@ -6,6 +6,8 @@ import 'package:stumato_assignment/ui/homepage.dart';
 import 'package:stumato_assignment/ui/transport/transport.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -17,9 +19,9 @@ class _MainScreenState extends State<MainScreen> {
   // List of screens to display based on the selected index
   final List<Widget> _screens = [
     HomeScreen(),
-    TransportScreen(),
-    AccessScreen(),
-    FacilitiesScreen(),
+    const TransportScreen(),
+    const AccessScreen(),
+    const FacilitiesScreen(),
     DiscoverScreen(),
   ];
 
