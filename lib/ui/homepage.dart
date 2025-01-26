@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-
-  
   final List<Map<String, dynamic>> items = [
     {'icon': Icons.local_parking, 'label': 'Parking'},
     {'icon': Icons.directions_car, 'label': 'Valet Parking'},
@@ -18,12 +16,14 @@ class HomeScreen extends StatelessWidget {
     {'icon': Icons.more_horiz, 'label': 'More'},
   ];
 
+  HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-              actions: [Icon(Icons.person)],
+              actions: [const Icon(Icons.person)],
               leading: const Icon(Icons.home),
               toolbarHeight: 90,
               title: const Text(
@@ -52,47 +52,43 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Expanded(
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3, // 3 columns
-                        mainAxisSpacing: 16.0, // Vertical spacing
-                        crossAxisSpacing: 16.0, // Horizontal spacing
-                      ),
-                      itemCount: items.length,
-                      itemBuilder: (context, index) {
-                        return Expanded(
-                          child: Card(
-                            elevation: 4,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  items[index]['icon'],
-                                  size: 40,
-                                  color: Colors.blue.shade900,
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  items[index]['label'],
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
+                  GridView.builder(
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // 3 columns
+                      mainAxisSpacing: 16.0, // Vertical spacing
+                      crossAxisSpacing: 16.0, // Horizontal spacing
                     ),
+                    itemCount: items.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              items[index]['icon'],
+                              size: 40,
+                              color: Colors.blue.shade900,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              items[index]['label'],
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ]))));
   }

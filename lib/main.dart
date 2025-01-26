@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stumato_assignment/ui/bottomnaviagtionbarscreen.dart';
 import 'package:provider/provider.dart';
-
+import 'package:stumato_assignment/providers/desksproviders/desks_providers.dart';
+import 'package:stumato_assignment/ui/bottomnaviagtionbarscreen.dart';
 
 
 
@@ -15,12 +15,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      home: MainScreen());
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => DeskProvider(),
+          )
+        ],
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: MainScreen(),
+        ));
   }
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:stumato_assignment/core/constants.dart';
 import 'package:stumato_assignment/ui/facilities/facilities_desks.dart';
 import 'package:stumato_assignment/ui/facilities/facilities_meetings.dart';
 import 'package:stumato_assignment/ui/facilities/facilities_shuttles.dart';
 
 class FacilitiesScreen extends StatelessWidget {
+     
+
   const FacilitiesScreen({super.key});
 
   @override
@@ -43,7 +46,7 @@ class FacilitiesScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DesksScreen()));
+                              builder: (context) => FacilitiesDeskScreen()));
                     },
                     child: Card(
                       elevation: 0,
@@ -119,9 +122,10 @@ class FacilitiesScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => FacilitiesShuttles()));
+                              builder: (context) => FacilitiesShuttlesScreen()));
                     },
                     child: Card(
+                      color: AppColors.primaryBackground,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
