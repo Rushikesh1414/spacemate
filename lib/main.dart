@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:stumato_assignment/ui/home/home_cubit/home_cubit.dart';
 import 'package:stumato_assignment/ui/mainview.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (_) => HomeCubit()..loadLocalData()),
+    // add more if needed
+  ], child: ProviderScope(child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {
