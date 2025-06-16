@@ -39,9 +39,19 @@ class HomeCubit extends Cubit<HomeState> {
         await saveDataLocally(items, headerText);
         emit(
             state.copyWith(items: items, header: headerText, isLoading: false));
+      } else {
+        emit(state.copyWith(isLoading: false));
       }
     } catch (e) {
       print("Error fetching home data: $e");
+      print("Error fetching home data: $e");
+
+      // Retry on server error (status code 500)
+      if (e.toString().contains('500')) {
+        print("Retrying... attempt");
+        await Future.delayed(Duration(seconds: 2)); // optional delay
+        return fetchAndStoreHomeData();
+      }
       emit(state.copyWith(isLoading: false));
     }
   }

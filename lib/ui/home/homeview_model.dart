@@ -7,6 +7,9 @@ import 'package:stumato_assignment/services/desks_service.dart';
 import '../../models/home_labels_icons.dart';
 
 class HomeviewModel extends BaseViewModel {
+  HomeviewModel() {
+    loadLocalData();
+  }
   List<Home> listOfItems = [];
   String header = "";
   bool isLoading = false;
@@ -28,6 +31,7 @@ class HomeviewModel extends BaseViewModel {
     // prefs.clear();
     String? storedData = prefs.getString('home_data');
     String? storedHeader = prefs.getString('home_header');
+    print("st $storedData");
     if (storedData != null && storedData.isNotEmpty) {
       print("Loading from local storage...");
       List<dynamic> jsonData = jsonDecode(storedData);
@@ -52,6 +56,7 @@ class HomeviewModel extends BaseViewModel {
         notifyListeners();
       }
     } catch (e) {
+      fetchAndStoreHomeData();
       print("Error fetching home data: $e");
     }
   }
